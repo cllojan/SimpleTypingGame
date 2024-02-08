@@ -1,8 +1,8 @@
 import React from "react";
 
-import RestartButton from "./components/RestartButton";
-import Results from "./components/Results";
-import UserTypings from "./components/UserTypings";
+import RestartButton from "./Components/RestartButton";
+import Results from "./Components/Results";
+import UserTypings from "./Components/UserTypings";
 import useEngine from "./hooks/useEngine";
 import Word from "./Word";
 import { calculateAccuracyPercentage } from "./utils/helpers";

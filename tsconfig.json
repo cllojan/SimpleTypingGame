@@ -13,8 +13,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-
+    "jsx": "react-jsx",    
+    "allowSyntheticDefaultImports": true,
+    
+    "forceConsistentCasingInFileNames": true,
+    
+    
+    
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
