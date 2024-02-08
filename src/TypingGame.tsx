@@ -1,76 +1,53 @@
-// TypingGame.js
-import { useState, useEffect } from 'react';
-import Word from './Word';
-import RestartButton from "./Components/RestartButton"
-import { faker } from "@faker-js/faker";
-const TheWords = faker.random.words(10);
-const TypingGame = () => {
-  console.log(TheWords)
-  const words = [TheWords];
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [inputValue, setInputValue] = useState('');
-  const [score, setScore] = useState(0);
+import React from "react";
 
-  useEffect(() => {
-    const handleKeyPress = (e:any) => {
-      if (e.key === 'Enter') {
-        checkInput();
-      }
-    };
+import RestartButton from "./components/RestartButton";
+import Results from "./components/Results";
+import UserTypings from "./components/UserTypings";
+import useEngine from "./hooks/useEngine";
+import Word from "./Word";
+import { calculateAccuracyPercentage } from "./utils/helpers";
 
-    window.addEventListener('keydown', handleKeyPress);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyPress);
-    };
-  }, [inputValue]);
-
-  const checkInput = () => {
-    const currentWord = words[currentWordIndex];
-    if (inputValue.trim().toLowerCase() === currentWord) {
-      setScore(score + 1);
-      setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
-      setInputValue('');
-    }
-  };
+const App = () => {
+  const { words, typed, timeLeft, errors, state, restart, totalTyped } =
+    useEngine();
 
   return (
-    <div>
-      <h1>Typing Game</h1>
-      <p>Score: {score}</p>
-      <CountDownTimer timeLeft={30}/>
-      <div>
-        {words.map((word, index) => (
-          <Word
-            key={index}
-            value={word}
-            current={index === currentWordIndex}
-            onRemove={() => {}}
-          />
-        ))}
-      </div>
-      <input
-        type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+    <>
+      <CountdownTimer timeLeft={timeLeft} />
+      <WordsContainer>
+        <Word key={words} words={words} />
+        {/* User typed characters will be overlayed over the generated words */}
+        <UserTypings
+          className="absolute inset-0"
+          words={words}
+          userInput={typed}
+        />
+      </WordsContainer>
+      <RestartButton
+        className={"mx-auto mt-10 text-slate-500"}
+        onRestart={restart}
       />
+      <Results
+        className="mt-10"
+        state={state}
+        errors={errors}
+        accuracyPercentage={calculateAccuracyPercentage(errors, totalTyped)}
+        total={totalTyped}
+      />
+    </>
+  );
+};
+
+const WordsContainer = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className="relative text-3xl max-w-xl leading-relaxed break-all mt-3">
+      {children}
     </div>
   );
 };
 
-export default TypingGame;
+const CountdownTimer = ({ timeLeft }: { timeLeft: number }) => {
+  return <h2 className="text-primary-400 font-medium">Time: {timeLeft}</h2>;
+};
 
-
-const CountDownTimer = ({timeLeft}: {timeLeft:number}) => {
-
-  return (
-    <div>
-      <h2 className="text-primary-400 font-medium">
-      Time: {timeLeft}
-      
-    </h2>
-    <RestartButton className={"mx-auto mt-10 text-slate-500"} onRestart={() => null}/>
-    </div>
-  )
-
-}
+export default App;

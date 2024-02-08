@@ -1,10 +1,10 @@
-import React from 'react';
 
-const Word = ({ value, current, onRemove }) => {
+
+const Word = ({words}: {words:string}) => {
   return (
-    <span className={current ? 'current-word' : 'word'} onClick={onRemove}>
-      {value}{' '}
-    </span>
+    <div className='text-4xl text-cetner text-slate-500'>
+      {words}
+    </div>
   );
 };
 
