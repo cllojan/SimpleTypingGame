@@ -18,10 +18,10 @@ const App = () => {
         <Word key={words} words={words} />
         {/* User typed characters will be overlayed over the generated words */}
         <UserTypings
-          className="absolute inset-0"
+          className="absolute inset-0 whitespace-no-wrap"
           words={words}
           userInput={typed}
-        />
+        />                 
       </WordsContainer>
       <RestartButton
         className={"mx-auto mt-10 text-slate-500"}
@@ -40,7 +40,7 @@ const App = () => {
 
 const WordsContainer = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="relative text-3xl max-w-xl leading-relaxed break-all mt-3">
+    <div className="relative text-3xl max-w-xl leading-relaxed  mt-3 whitespace-no-wrap">
       {children}
     </div>
   );
