@@ -15,11 +15,11 @@ const App = () => {
     <>
       <CountdownTimer timeLeft={timeLeft} />
       <WordsContainer>
-        <Word key={words} words={words} />
+        <Word key={words} words={quote} />
         {/* User typed characters will be overlayed over the generated words */}
         <UserTypings
           className="absolute inset-0 whitespace-no-wrap"
-          words={words}
+          words={quote}
           userInput={typed}
         />                 
       </WordsContainer>

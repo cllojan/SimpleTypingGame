@@ -12,7 +12,7 @@ const useWords = (count: number) => {
   const updateWords = useCallback(() => {
     setWords(generateWords(count));
   }, [count]);
-  console.log(words)
+  
   return { words, updateWords };
 };
 

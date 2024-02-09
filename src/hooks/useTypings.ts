@@ -9,17 +9,20 @@ const useTypings = (enabled: boolean) => {
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {
       if (!enabled || !isKeyboardCodeAllowed(code)) {
+        console.log(code)
         return;
       }
 
       switch (key) {
         case "Backspace":
+          
           setTyped((prev) => prev.slice(0, -1));
           setCursor((cursor) => cursor - 1);
           totalTyped.current -= 1;
           break;
-        default:
+        default:          
           setTyped((prev) => prev.concat(key));
+          
           setCursor((cursor) => cursor + 1);
           totalTyped.current += 1;
       }
