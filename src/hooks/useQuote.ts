@@ -6,7 +6,7 @@ const useQuote = (limit: number) => {
       quote = getQuote(limit);
     },[limit])
     
-    return {quote, updateQuote}
+    return {quote,  updateQuote }
   } 
 
 export default useQuote;

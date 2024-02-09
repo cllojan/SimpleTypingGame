@@ -15,8 +15,8 @@ const useEngine = () => {
   const { timeLeft, startCountdown, resetCountdown } =
     useCountdown(COUNTDOWN_SECONDS);
   const { words, updateWords } = useWords(NUMBER_OF_WORDS);
-  
-  console.log(useQuote(100))
+  const {quote, updateQuote} = useQuote(100);
+  console.log(quote)
   const { cursor, typed, clearTyped, totalTyped, resetTotalTyped } = useTypings(
     state !== "finish"
   );
@@ -71,7 +71,7 @@ const useEngine = () => {
     }
   }, [clearTyped, areWordsFinished, updateWords, sumErrors]);
 
-  return { state, words, typed, errors, restart, timeLeft, totalTyped };
+  return { state, words, quote, typed, errors, restart, timeLeft, totalTyped };
 };
 
 export default useEngine;

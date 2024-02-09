@@ -8,9 +8,9 @@ import Word from "./Word";
 import { calculateAccuracyPercentage } from "./utils/helpers";
 
 const App = () => {
-  const { words, typed, timeLeft, errors, state, restart, totalTyped } =
+  const { words, typed,quote, timeLeft, errors, state, restart, totalTyped } =
     useEngine();
-
+  
   return (
     <>
       <CountdownTimer timeLeft={timeLeft} />
