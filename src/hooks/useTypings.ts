@@ -8,8 +8,7 @@ const useTypings = (enabled: boolean) => {
 
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {
-      if (!enabled || !isKeyboardCodeAllowed(code)) {
-        console.log(code)
+      if (!enabled || !isKeyboardCodeAllowed(code)) {        
         return;
       }
 

@@ -1,12 +1,17 @@
-import { useCallback, useState} from "react";
-import getQuote from "../utils/getQuotes";
+// useQuote.js
+import { useState, useEffect } from "react";
+//import getQuote from "../utils/getQuotes";
+import { MdAssignmentReturn } from "react-icons/md";
+import {getRandom} from '@anilseervi/inspirational-quotes';
+const getQuote = (limit: number) => {
+  
+    return getRandom().quote;
+}
+
 const useQuote = (limit: number) => {
-    let quote = getQuote(limit);     
-    const updateQuote = useCallback(() => {
-      quote = getQuote(limit);
-    },[limit])
+  const [quote, setQuote] = useState<string>(getQuote(limit));
     
-    return {quote,  updateQuote }
-  } 
+  return { quote };
+};
 
 export default useQuote;

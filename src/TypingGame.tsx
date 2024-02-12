@@ -11,6 +11,8 @@ const App = () => {
   const { words, typed,quote, timeLeft, errors, state, restart, totalTyped } =
     useEngine();
   
+
+
   return (
     <>
       <CountdownTimer timeLeft={timeLeft} />
@@ -40,7 +42,7 @@ const App = () => {
 
 const WordsContainer = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="relative text-3xl max-w-xl leading-relaxed  mt-3 whitespace-no-wrap">
+    <div className="relative text-3xl max-w-xxl leading-relaxed  mt-3 whitespace-no-wrap">
       {children}
     </div>
   );
