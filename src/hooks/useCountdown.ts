@@ -5,6 +5,7 @@ const useCountdown = (seconds: number) => {
   const intervalRef = useRef<NodeJS.Timer | null>(null);
   const hasTimerEnded = timeLeft <= 0;
   const isRunning = intervalRef.current != null;
+  const stoppedTimeRef = useRef<number | null>(null);
 
   const startCountdown = useCallback(() => {
     if (!hasTimerEnded && !isRunning) {
@@ -13,6 +14,11 @@ const useCountdown = (seconds: number) => {
       }, 1000);
     }
   }, [setTimeLeft, hasTimerEnded, isRunning]);
+  const stopCountdown = useCallback(() => {
+    clearInterval(Number(intervalRef.current!));
+    intervalRef.current = null;
+    stoppedTimeRef.current = timeLeft;
+  }, [timeLeft]);
 
   const resetCountdown = useCallback(() => {
     clearInterval(Number(intervalRef.current!));
@@ -33,7 +39,7 @@ const useCountdown = (seconds: number) => {
     return () => clearInterval(Number(intervalRef.current!));
   }, []);
 
-  return { timeLeft, startCountdown, resetCountdown };
+  return { timeLeft, startCountdown, resetCountdown,stopCountdown,stoppedTimeRef };
 };
 
 export default useCountdown;

@@ -8,11 +8,11 @@ import Word from "./Word";
 import { calculateAccuracyPercentage } from "./utils/helpers";
 
 const App = () => {
-  const { words, typed,quote, timeLeft, errors, state, restart, totalTyped } =
+  const { words, typed,quote, timeLeft, errors, state, restart, totalTyped ,stoppedTimeRef} =
     useEngine();
   
 
-
+  console.log(stoppedTimeRef)
   return (
     <>
       <CountdownTimer timeLeft={timeLeft} />
@@ -34,6 +34,7 @@ const App = () => {
         state={state}
         errors={errors}
         accuracyPercentage={calculateAccuracyPercentage(errors, totalTyped)}
+        stopTimeRef={stoppedTimeRef.current}
         total={totalTyped}
       />
     </>

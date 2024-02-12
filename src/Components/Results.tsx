@@ -7,12 +7,14 @@ const Results = ({
   errors,
   accuracyPercentage,
   total,
+  stopTimeRef,
   className = "",
 }: {
   state: State;
   errors: number;
   accuracyPercentage: number;
   total: number;
+  stopTimeRef:any;
   className?: string;
 }) => {
   if (state !== "finish") {
@@ -42,6 +44,13 @@ const Results = ({
         transition={{ duration: 0.3, delay: 0.5 }}
       >
         Accuracy: {formatPercentage(accuracyPercentage)}
+      </motion.li>
+      <motion.li
+        initial={initial}
+        animate={animate}
+        transition={{ duration: 0.3, delay: 0.5 }}
+      >
+        Time: {stopTimeRef}
       </motion.li>
       <motion.li
         initial={initial}

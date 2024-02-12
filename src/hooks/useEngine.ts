@@ -12,7 +12,7 @@ const COUNTDOWN_SECONDS = 50;
 
 const useEngine = () => {
   const [state, setState] = useState<State>("start");
-  const { timeLeft, startCountdown, resetCountdown } =
+  const { timeLeft, startCountdown, resetCountdown,stopCountdown,stoppedTimeRef } =
     useCountdown(COUNTDOWN_SECONDS);
   const { words, updateWords } = useWords(NUMBER_OF_WORDS);
   
@@ -24,7 +24,7 @@ const useEngine = () => {
   const [errors, setErrors] = useState(0);
   const isStarting = state === "start" && cursor > 0;
   // logic finish
-  let areWordsFinished = cursor === quote.length;
+  let areWordsFinished =cursor>0 && cursor === quote.length;
   
   const restart = useCallback(() => {
     debug("restarting...");
@@ -73,12 +73,12 @@ const useEngine = () => {
       debug("words are finished...");
       sumErrors();
       setState("finish");
-      
+      stopCountdown()
       clearTyped();
     }
-  }, [clearTyped, words, updateWords, sumErrors]);
+  }, [clearTyped, words, updateWords,stopCountdown, sumErrors]);
 
-  return { state, words, quote, typed, errors, restart, timeLeft, totalTyped };
+  return { state, words, quote, typed, errors, restart, timeLeft, totalTyped,stoppedTimeRef };
 };
 
 export default useEngine;
