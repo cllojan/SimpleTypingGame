@@ -16,14 +16,23 @@ const App = () => {
   return (
     <>
 
-      <div className="bg-slate-900  max-w-screen-xl grid grid-cols-2 justify-center align-center ">
+
+      <div className="bg-slate-900  max-w-screen-xl pl-10 pr-10 pt-5 pb-5 rounded-md shadow-md grid grid-cols-3 justify-center align-center ">
         <div className="flex gap-x-2 ">
-          <button className="text-slate-100 text-2xl"type="button">Quote</button>
-          <button className="text-slate-100 text-2xl"type="button">Words</button>
+          <button className="text-slate-100 text-sm"type="button">Quote</button>
+          <button className="text-slate-100 text-sm"type="button">Words</button>
         </div>
-        <div className="bg-slate-900 ">
-          <button className="text-slate-100 text-2xl"type="button">Quote</button>
-          <button className="text-slate-100 text-2xl"type="button">Words</button>
+        <div className="bg-slate-900 flex gap-x-4">
+          <button className="text-slate-100 text-sm "type="button">short</button>
+          <button className="text-slate-100 text-sm "type="button">medium</button>
+          <button className="text-slate-100 text-sm "type="button">long</button>
+          <button className="text-slate-100 text-sm "type="button">thicc</button>
+        </div>
+        <div className="bg-slate-900 flex gap-x-4">
+          <button className="text-slate-100 text-sm "type="button">short</button>
+          <button className="text-slate-100 text-sm "type="button">medium</button>
+          <button className="text-slate-100 text-sm "type="button">long</button>
+          <button className="text-slate-100 text-sm "type="button">thicc</button>
         </div>
       </div>
       <CountdownTimer timeLeft={timeLeft} />
@@ -55,7 +64,7 @@ const App = () => {
 
 const WordsContainer = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="relative text-3xl max-w-4xl max-h-screen-xl leading-relaxed  mt-3 ">
+    <div className="relative text-3xl max-w-4xl  leading-relaxed  mt-3 ">
       {children}
     </div>
   );
