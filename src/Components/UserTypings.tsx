@@ -1,6 +1,6 @@
 import cn from "classnames";
 import Caret from "./Caret";
-
+import { motion } from "framer-motion";
 const UserTypings = ({
   userInput,
   words,
@@ -38,6 +38,7 @@ const Character = ({
 
   return (
     <span
+    
       className={cn({
         "text-red-500": !isCorrect && !isWhiteSpace,
         "text-primary-400": isCorrect && !isWhiteSpace,

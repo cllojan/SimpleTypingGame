@@ -8,22 +8,33 @@ import Word from "./Word";
 import { calculateAccuracyPercentage } from "./utils/helpers";
 
 const App = () => {
-  const { words, typed,quote, timeLeft, errors, state, restart, totalTyped ,stoppedTimeRef} =
+  const { words, typed, quote, timeLeft, errors, state, restart, totalTyped, stoppedTimeRef } =
     useEngine();
-  
+
 
   console.log(stoppedTimeRef)
   return (
     <>
+
+      <div className="bg-slate-900  max-w-screen-xl grid grid-cols-2 justify-center align-center ">
+        <div className="flex gap-x-2 ">
+          <button className="text-slate-100 text-2xl"type="button">Quote</button>
+          <button className="text-slate-100 text-2xl"type="button">Words</button>
+        </div>
+        <div className="bg-slate-900 ">
+          <button className="text-slate-100 text-2xl"type="button">Quote</button>
+          <button className="text-slate-100 text-2xl"type="button">Words</button>
+        </div>
+      </div>
       <CountdownTimer timeLeft={timeLeft} />
       <WordsContainer>
         <Word key={words} words={quote} />
         {/* User typed characters will be overlayed over the generated words */}
         <UserTypings
-          className="absolute inset-0 whitespace-no-wrap"
+          className="absolute inset-0 text-wrap "
           words={quote}
           userInput={typed}
-        />                 
+        />
       </WordsContainer>
       <RestartButton
         className={"mx-auto mt-10 text-slate-500"}
@@ -41,9 +52,10 @@ const App = () => {
   );
 };
 
+
 const WordsContainer = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="relative text-3xl max-w-xxl leading-relaxed  mt-3 whitespace-no-wrap">
+    <div className="relative text-3xl max-w-4xl max-h-screen-xl leading-relaxed  mt-3 ">
       {children}
     </div>
   );
