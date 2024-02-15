@@ -15,48 +15,55 @@ const App = () => {
   console.log(stoppedTimeRef)
   return (
     <>
+      {
+        state == "start" || state == "run" ? <>
+          <div className="bg-slate-900  max-w-screen-xl pl-10 pr-10 pt-5 pb-5 rounded-md shadow-md grid grid-cols-3 justify-center align-center ">
+            <div className="flex gap-x-2 ">
+              <button className="text-slate-100 text-sm" type="button">Quote</button>
+              <button className="text-slate-100 text-sm" type="button">Words</button>
+            </div>
+            <div className="bg-slate-900 flex gap-x-4">
+              <button className="text-slate-100 text-sm " type="button">short</button>
+              <button className="text-slate-100 text-sm " type="button">medium</button>
+              <button className="text-slate-100 text-sm " type="button">long</button>
+              <button className="text-slate-100 text-sm " type="button">thicc</button>
+            </div>
+            <div className="bg-slate-900 flex gap-x-4">
+              <button className="text-slate-100 text-sm " type="button">short</button>
+              <button className="text-slate-100 text-sm " type="button">medium</button>
+              <button className="text-slate-100 text-sm " type="button">long</button>
+              <button className="text-slate-100 text-sm " type="button">thicc</button>
+            </div>
+          </div>
+          <CountdownTimer timeLeft={timeLeft} />
+          <WordsContainer>
+            <Word key={words} words={quote} />
+            {/* User typed characters will be overlayed over the generated words */}
+            <UserTypings
+              className="absolute inset-0 text-wrap "
+              words={quote}
+              userInput={typed}
+            />
+          </WordsContainer>
+        </>
+          :
+          <>
+            <RestartButton
+              className={"mx-auto mt-10 text-slate-500"}
+              onRestart={restart}
+            />
+            <Results
+              className="mt-10"
+              state={state}
+              errors={errors}
+              accuracyPercentage={calculateAccuracyPercentage(errors, totalTyped)}
+              stopTimeRef={stoppedTimeRef.current}
+              total={totalTyped}
+            />
+          </>
+      }
 
 
-      <div className="bg-slate-900  max-w-screen-xl pl-10 pr-10 pt-5 pb-5 rounded-md shadow-md grid grid-cols-3 justify-center align-center ">
-        <div className="flex gap-x-2 ">
-          <button className="text-slate-100 text-sm"type="button">Quote</button>
-          <button className="text-slate-100 text-sm"type="button">Words</button>
-        </div>
-        <div className="bg-slate-900 flex gap-x-4">
-          <button className="text-slate-100 text-sm "type="button">short</button>
-          <button className="text-slate-100 text-sm "type="button">medium</button>
-          <button className="text-slate-100 text-sm "type="button">long</button>
-          <button className="text-slate-100 text-sm "type="button">thicc</button>
-        </div>
-        <div className="bg-slate-900 flex gap-x-4">
-          <button className="text-slate-100 text-sm "type="button">short</button>
-          <button className="text-slate-100 text-sm "type="button">medium</button>
-          <button className="text-slate-100 text-sm "type="button">long</button>
-          <button className="text-slate-100 text-sm "type="button">thicc</button>
-        </div>
-      </div>
-      <CountdownTimer timeLeft={timeLeft} />
-      <WordsContainer>
-        <Word key={words} words={quote} />
-        {/* User typed characters will be overlayed over the generated words */}
-        <UserTypings
-          className="absolute inset-0 text-wrap "
-          words={quote}
-          userInput={typed}
-        />
-      </WordsContainer>
-      <RestartButton
-        className={"mx-auto mt-10 text-slate-500"}
-        onRestart={restart}
-      />
-      <Results
-        className="mt-10"
-        state={state}
-        errors={errors}
-        accuracyPercentage={calculateAccuracyPercentage(errors, totalTyped)}
-        stopTimeRef={stoppedTimeRef.current}
-        total={totalTyped}
-      />
     </>
   );
 };

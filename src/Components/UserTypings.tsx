@@ -1,6 +1,6 @@
 import cn from "classnames";
 import Caret from "./Caret";
-import { motion } from "framer-motion";
+
 const UserTypings = ({
   userInput,
   words,
@@ -11,7 +11,7 @@ const UserTypings = ({
   className?: string;
 }) => {
   const typedCharacters = userInput.split("");
-
+  
   return (
     <div className={className}>
       {typedCharacters.map((char, index) => (
