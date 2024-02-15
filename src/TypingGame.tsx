@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import RestartButton from "./Components/RestartButton";
 import Results from "./Components/Results";
@@ -8,11 +8,15 @@ import Word from "./Word";
 import { calculateAccuracyPercentage } from "./utils/helpers";
 import { calculateWPM } from "./utils/helpers";
 const App = () => {
+
+  const [type, setType] = useState("words");
+  const [conf, setConf] = useState("words");
+  const [mod, setMod] = useState([]);
   const { words, typed, quote, timeLeft, errors, state, restart, totalTyped, stoppedTimeRef,startTime } =
     useEngine();
 
+    
 
-  console.log(stoppedTimeRef)
   return (
     <>
       
@@ -28,10 +32,9 @@ const App = () => {
               <button className="text-slate-100 text-sm " type="button">thicc</button>
             </div>
             <div className="bg-slate-900 flex gap-x-4">
-              <button className="text-slate-100 text-sm " type="button">short</button>
-              <button className="text-slate-100 text-sm " type="button">medium</button>
-              <button className="text-slate-100 text-sm " type="button">long</button>
-              <button className="text-slate-100 text-sm " type="button">thicc</button>
+              <button className="text-slate-100 text-sm " type="button">DB</button>
+              <button className="text-slate-100 text-sm " type="button">SD</button>
+              <button className="text-slate-100 text-sm " type="button">HD</button>              
             </div>
           </div>
           <CountdownTimer timeLeft={timeLeft} />
