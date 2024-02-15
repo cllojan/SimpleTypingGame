@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const useCountdown = (seconds: number) => {
   const [timeLeft, setTimeLeft] = useState(seconds);
+  const [startTime, setStartTime] = useState<number | null>(null);
+
   const intervalRef = useRef<NodeJS.Timer | null>(null);
   const hasTimerEnded = timeLeft <= 0;
   const isRunning = intervalRef.current != null;
@@ -9,8 +11,11 @@ const useCountdown = (seconds: number) => {
 
   const startCountdown = useCallback(() => {
     if (!hasTimerEnded && !isRunning) {
+      setStartTime(Date.now());
+
       intervalRef.current = setInterval(() => {
         setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
+        
       }, 1000);
     }
   }, [setTimeLeft, hasTimerEnded, isRunning]);
@@ -18,12 +23,18 @@ const useCountdown = (seconds: number) => {
     clearInterval(Number(intervalRef.current!));
     intervalRef.current = null;
     stoppedTimeRef.current = timeLeft;
+    if (startTime !== null) {
+      // Calcular el tiempo total transcurrido hasta ahora
+      const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+      setTimeLeft((prevTimeLeft) => Math.max(prevTimeLeft - elapsedTime, 0));
+    }
   }, [timeLeft]);
 
   const resetCountdown = useCallback(() => {
     clearInterval(Number(intervalRef.current!));
     intervalRef.current = null;
     setTimeLeft(seconds);
+    setStartTime(null);
   }, [seconds]);
 
   // when the countdown reaches 0, clear the countdown interval
@@ -39,7 +50,7 @@ const useCountdown = (seconds: number) => {
     return () => clearInterval(Number(intervalRef.current!));
   }, []);
 
-  return { timeLeft, startCountdown, resetCountdown,stopCountdown,stoppedTimeRef };
+  return { timeLeft,startTime, startCountdown, resetCountdown,stopCountdown,stoppedTimeRef };
 };
 
 export default useCountdown;

@@ -12,7 +12,7 @@ const COUNTDOWN_SECONDS = 50;
 
 const useEngine = () => {
   const [state, setState] = useState<State>("start");
-  const { timeLeft, startCountdown, resetCountdown,stopCountdown,stoppedTimeRef } =
+  const { timeLeft,startTime, startCountdown, resetCountdown,stopCountdown,stoppedTimeRef } =
     useCountdown(COUNTDOWN_SECONDS);
   const { words, updateWords } = useWords(NUMBER_OF_WORDS);
   
@@ -78,7 +78,7 @@ const useEngine = () => {
     }
   }, [clearTyped, words, updateWords,stopCountdown, sumErrors]);
 
-  return { state, words, quote, typed, errors, restart, timeLeft, totalTyped,stoppedTimeRef };
+  return { state, words, quote,typed, errors, restart, timeLeft, totalTyped,stoppedTimeRef,startTime };
 };
 
 export default useEngine;

@@ -6,17 +6,16 @@ import UserTypings from "./Components/UserTypings";
 import useEngine from "./hooks/useEngine";
 import Word from "./Word";
 import { calculateAccuracyPercentage } from "./utils/helpers";
-
+import { calculateWPM } from "./utils/helpers";
 const App = () => {
-  const { words, typed, quote, timeLeft, errors, state, restart, totalTyped, stoppedTimeRef } =
+  const { words, typed, quote, timeLeft, errors, state, restart, totalTyped, stoppedTimeRef,startTime } =
     useEngine();
 
 
   console.log(stoppedTimeRef)
   return (
     <>
-      {
-        state == "start" || state == "run" ? <>
+      
           <div className="bg-slate-900  max-w-screen-xl pl-10 pr-10 pt-5 pb-5 rounded-md shadow-md grid grid-cols-3 justify-center align-center ">
             <div className="flex gap-x-2 ">
               <button className="text-slate-100 text-sm" type="button">Quote</button>
@@ -45,25 +44,21 @@ const App = () => {
               userInput={typed}
             />
           </WordsContainer>
-        </>
-          :
-          <>
-            <RestartButton
-              className={"mx-auto mt-10 text-slate-500"}
-              onRestart={restart}
-            />
+      
             <Results
               className="mt-10"
               state={state}
               errors={errors}
+              wpm={calculateWPM(totalTyped,startTime as number)}
               accuracyPercentage={calculateAccuracyPercentage(errors, totalTyped)}
               stopTimeRef={stoppedTimeRef.current}
               total={totalTyped}
             />
-          </>
-      }
-
-
+            <RestartButton
+              className={"mx-auto mt-10 text-slate-500"}
+              onRestart={restart}
+            />
+          
     </>
   );
 };

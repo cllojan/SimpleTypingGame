@@ -31,7 +31,10 @@ export const calculateAccuracyPercentage = (errors: number, total: number) => {
 
   return 0;
 };
-
+export const calculateWPM = (totalWords: number, time: number) => {
+  let totalTime = Math.round(time/60)/100000000000;    
+  return (totalWords /5)/Number(totalTime.toFixed(2))
+}
 export const formatPercentage = (percentage: number) => {
   return percentage.toFixed(0) + "%";
 };
